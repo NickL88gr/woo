@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magnetica3D Full Site + SVG Background</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: auto; min-height: 100%; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+    .animated-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -999;
+      background: url('https://cdn.svgator.com/images/2023/03/animated-geometric-shapes-background.svg') no-repeat center center;
+      background-size: cover;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #000;
+      color: #fff;
+      z-index: 1000;
+      padding: 1rem;
+    }
+    body {
+      padding-top: 100px;
+    }
+    .nav-container { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .logo { font-size: 1.5rem; color: #4fd1c5; margin-bottom: 0.5rem; }
+    .nav-menu { display: flex; list-style: none; gap: 1.5rem; justify-content: center; }
+    .nav-link { color: #fff; text-decoration: none; text-transform: uppercase; font-size: .9rem; letter-spacing: 1px; }
+    .nav-link:hover { color: #4fd1c5; }
+
+    section {
+      padding: 4rem 2rem;
+      background-color: rgba(255, 255, 255, 0.88);
+      margin: 2rem auto;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 1000px;
+      position: relative;
+    }
+
+    .svg-divider {
+      position: relative;
+      top: -1px;
+      line-height: 0;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    .product-card img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .product-card h3 {
+      margin: 0.5rem 0;
+      color: #4fd1c5;
+    }
+    .product-card p {
+      margin: 0.5rem 0;
+      color: #333;
+    }
+
+    .show-more {
+      margin-top: 2rem;
+    }
+
+    .show-more a, .custom-btn {
+      background: #805ad5;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+    .show-more a:hover, .custom-btn:hover {
+      background: #4fd1c5;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 400px;
+      text-align: center;
+      position: relative;
+    }
+    .popup-content input {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .popup-content button {
+      background: #805ad5;
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    .popup-content button:hover {
+      background: #4fd1c5;
+    }
+    .popup-close {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 20px;
+      color: #888;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #000;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+    .social-icons {
+      margin-top: 1rem;
+    }
+    .social-icons a {
+      color: #4fd1c5;
+      font-size: 1.5rem;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-30px); }
+  100% { transform: translateX(0); }
+}
+  100% { transform: translateX(-100px); }
+}
+    to { transform: translateX(-100px); }
+  }
+  .scroll-wave path {
+  animation: scrollLeft 8s ease-in-out infinite;
+}
+@keyframes waveMotion {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+  100% { transform: translateY(0); }
+}
+  50% { transform: translateX(-20px); }
+  100% { transform: translateX(0); }
+}
+</style>
+</head>
+<body>
+  <div class="animated-bg"></div>
+  <header>
+    <div class="nav-container">
+      <div class="logo"><i class="fas fa-cube"></i> Magnetica3D</div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link">Αρχική</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="#contact" class="nav-link">Επικοινωνία</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <section id="home" style="min-height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+  <h1 style="font-size: 2.5rem; background: linear-gradient(90deg, #805ad5, #4fd1c5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeIn 1s ease-in-out;">Καλωσόρισες στο Magnetica3D</h1>
+  <p style="margin-top: 1rem; font-size: 1.2rem; animation: fadeIn 2s ease-in-out;">Χειροποίητα 3D printed μαγνητάκια και πολλά άλλα.</p>
+  <a href="#about" class="custom-btn" style="margin-top: 2rem; animation: fadeIn 3s ease-in-out;">Ξεκινήστε την περιήγηση</a>
+  </section>
+
+  <div class="svg-divider" style="margin-top: -3rem; position: relative; z-index: 1; overflow: hidden;">
+  <svg class="scroll-wave" viewBox="0 0 1440 150" preserveAspectRatio="none" style="width:100%; height:150px; display:block;">
+    <path d="M0,0 Q720,200 1440,0 L1440,0 L0,0 Z" fill="rgba(128, 90, 213, 0.8)" style="animation: waveMotion 6s ease-in-out infinite;"></path>
+  </svg>
+</div>
+
+  <section id="about" style="margin-top: -100px; text-align: center;">
+  <div style="font-size: 3rem; color: orange; margin-bottom: 1rem; margin-top: -4rem; position: relative; z-index: 10; display: inline-block; background: white; padding: 1rem 1.2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"><i class="fas fa-lightbulb"></i></div>
+  <h2>Η Αποστολή μας</h2>
+  
+  <p>Είμαστε παθιασμένοι με την τεχνολογία και το design, δημιουργώντας μοναδικά κομμάτια με 3D εκτύπωση.</p>
+  <p>Από eco-friendly PLA μέχρι custom σχέδια για τουριστικά και συλλεκτικά μαγνητάκια.</p>
+  <p>Στόχος μας είναι να γίνουμε το νούμερο 1 σημείο για 3D printed δώρα στην Ελλάδα.</p>
+</section>
+
+  <div class="svg-divider">
+    <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="width:100%; height:100px;">
+      <path d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" fill="rgba(72, 187, 255, 0.6)"></path>
+    </svg>
+  </div>
+
+  <section id="portfolio">
+    <h2>Δείγματα Εργασιών</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://placehold.co/300x200?text=Magnet+1" alt="Magnet 1">
+        <h3>Magnet 1</h3>
+        <p>Εντυπωσιακός σχεδιασμός εμπνευσμένος από τα νησιά του Ιονίου.</p>
+        <p><strong>Τιμή:</strong> 4.90€</p>
+      </div>
+      <div class="product-card">
+        <img src="https://placehold.co/300x200?text=Magnet+2" alt="Magnet 2">
+        <h3>Magnet 2</h3>
+        <p>3D printed μαγνητάκι με λεπτομέρεια και χαρακτήρα.</p>
+        <p><strong>Τιμή:</strong> 5.50€</p>
+      </div>
+      <div class="product-card">
+        <img src="https://placehold.co/300x200?text=Magnet+3" alt="Magnet 3">
+        <h3>Magnet 3</h3>
+        <p>Ιδανικό για τουριστικά καταστήματα και συλλέκτες.</p>
+        <p><strong>Τιμή:</strong> 3.80€</p>
+      </div>
+      <div class="product-card">
+        <img src="https://placehold.co/300x200?text=Magnet+4" alt="Magnet 4">
+        <h3>Magnet 4</h3>
+        <p>Μινιμαλιστικό και φιλικό προς το περιβάλλον PLA σχέδιο.</p>
+        <p><strong>Τιμή:</strong> 4.20€</p>
+      </div>
+    </div>
+
+    <section id="custom-design">
+      <h2>Custom Σχέδια Κατά Παραγγελία</h2>
+      <p>Έχεις μια ιδέα; Την κάνουμε πραγματικότητα!</p>
+      <p>Οι πελάτες μας μάς περιγράφουν την ιδέα τους και εμείς αναλαμβάνουμε όλα τα υπόλοιπα, από τον σχεδιασμό έως την τελική εκτύπωση.</p>
+      <p><strong>Δοκίμασέ το χωρίς ρίσκο:</strong> Σου στέλνουμε <u>δωρεάν δείγμα</u> στην πόρτα σου για να το δεις από κοντά πριν αποφασίσεις.</p>
+      <a href="#" class="custom-btn" onclick="document.getElementById('popupForm').style.display='flex'">Ζητήστε Δωρεάν Δείγμα</a>
+    </section>
+
+    <div class="show-more">
+      <a href="#">Δείτε περισσότερα σχέδια</a>
+    </div>
+  </section>
+
+  <div class="popup" id="popupForm">
+    <div class="popup-content">
+      <div class="popup-close" onclick="document.getElementById('popupForm').style.display='none'">&times;</div>
+      <h3>Αίτηση Δωρεάν Δείγματος</h3>
+      <input type="text" placeholder="Όνομα">
+      <input type="text" placeholder="Επώνυμο">
+      <input type="text" placeholder="Τηλέφωνο">
+      <button onclick="document.getElementById('popupForm').style.display='none'">Αποστολή</button>
+    </div>
+  </div>
+
+  <footer>
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 4rem; text-align: left; max-width: 1000px; margin: auto;">
+    <div style="flex: 1; min-width: 250px; border-right: 1px solid rgba(255,255,255,0.2); padding-right: 2rem;">
+      <h3 style="margin-bottom: 1rem; color: #4fd1c5;">Ακολουθήστε μας</h3>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i> Facebook</a><br>
+        <a href="#"><i class="fab fa-instagram"></i> Instagram</a><br>
+        <a href="#"><i class="fab fa-tiktok"></i> TikTok</a>
+      </div>
+    </div>
+    <div style="flex: 1; min-width: 250px; padding-left: 2rem;">
+      <h3 style="margin-bottom: 1rem; color: #4fd1c5;">Επικοινωνία</h3>
+      <p><strong>Email:</strong> info@magnetica3d.gr</p>
+      <p><strong>Instagram:</strong> @magnetica3d</p>
+      <p><strong>Τοποθεσία:</strong> Παξοί, Ελλάδα</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
